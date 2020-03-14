@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: todo-service
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://database-1.cneixz0tvwnm.ap-northeast-2.rds.amazonaws.com/todo?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&rewriteBatchedStatements=true&useSSL=false
+    username: codegun
+    password: codegun1234
+    hikari:
+      connectionTimeout: 10000
+      idleTimeout: 120000
+      maxLifetime: 1200000
+      minimumIdle: 20
+      maximumPoolSize: 50
+      validationTimeout: 5000
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect
+        jdbc:
+          batch_size: 100
+          batch_versioned_data: true
+        order_inserts: true
+        order_updates: true
+    generate-ddl: true
+
+server:
+  port: 8090
+
+  tomcat:
+    accesslog:
+      enabled: true
+      pattern: "{yyyy-MM-dd HH:mm:ss}t\t%s\t%r\t%{User-Agent}i\t%{Referer}i\t%a\t%b\t%T"
+      buffered: false
+
+logging:
+  level:
+    ROOT: INFO
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
